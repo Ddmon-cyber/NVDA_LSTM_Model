@@ -14,11 +14,11 @@ Beyond model development, this project emphasizes **failure analysis, error diag
   - MACD, Signal Line, Histogram
   - RSI  
 - **Approach:**
-  1. Data preprocessing and feature engineering (MACD, RSI, SMA indicators)
-  2. Sequence creation for time-series input (20-week lookback)
-  3. Training a stacked LSTM model with dropout regularization
-  4. Evaluation using accuracy, ROC-AUC, and confusion matrix
-
+- Feature engineering (trend & momentum indicators)
+- 20-week lookback sequence creation
+- Stacked LSTM architecture
+- Chronological train-validation-test split
+- Evaluation using classification metrics and probability analysis
 
 ## ❗ Failure Analysis Summary
 The LSTM model achieved 34.38% test accuracy, below random benchmark levels.
