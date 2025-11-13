@@ -5,8 +5,11 @@ Beyond model development, this project emphasizes **failure analysis, error diag
 
 
 ## 🔍 Overview
-- **Objective:** Predict whether NVDA’s closing price will increase (1) or decrease (0) the following week.  
-- **Data Source:** Weekly OHLCV data collected via yfinance, enriched with technical indicators:
+- **Objective:** 
+  Predict whether NVDA’s closing price will increase (1) or decrease (0) the following week.
+  
+- **Data Source:** 
+  Weekly OHLCV data collected via yfinance, enriched with technical indicators:
   - SMA20, SMA50, SMA200
   - MACD, Signal Line, Histogram
   - RSI  
@@ -17,44 +20,88 @@ Beyond model development, this project emphasizes **failure analysis, error diag
   4. Evaluation using accuracy, ROC-AUC, and confusion matrix
 
 
-## 🧠 Model Architecture
-- Two stacked **LSTM** layers (64 and 32 units)  
-- **Dropout (0.2)** to reduce overfitting  
-- **Dense (sigmoid)** output for binary classification  
-- Optimizer: **Adam**  
-- Loss function: **Binary Crossentropy**
+## ❗ Failure Analysis Summary
+The LSTM model achieved 34.38% test accuracy, below random benchmark levels.
+Detailed analysis reveals several systemic failure patterns.
 
+## 1️⃣ Overfitting & Generalization Issues
+- Training accuracy increased steadily
+- Validation accuracy remained unstable
+- Validation loss diverged
 
-## 📈 Results Summary
-- The LSTM achieved **~34% test accuracy**, showing the **difficulty of capturing weekly stock direction** using only technical indicators.  
-- Results highlight the **non-linear and volatile nature** of financial time-series data.  
-- Future work could explore:
-  - Incorporating **GRU** or **Transformer** architectures  
-  - Adding **sentiment or macroeconomic features**  
-  - Using **ensemble or hybrid models** for improved stability  
+### Conclusion:
+The model memorized patterns in the training set but could not generalize to unseen data.
 
+## 2️⃣ Low Confidence Predictions
+Model outputs were concentrated between 0.40–0.48, indicating:
+- High uncertainty
+- Weak decision boundaries
+- Minimal signal extraction
 
-## 🧰 Tools & Libraries
-- Python 🐍  
-- TensorFlow / Keras  
-- Pandas & NumPy  
-- Scikit-learn  
-- Matplotlib  
-- yfinance  
+## 3️⃣ Failure Patterns During Volatile Periods
+Misclassifications clustered around:
+- Earnings release weeks
+- Breakouts/reversalsH
+- igh-volume anomalies
 
+### Interpretation:
+Weekly direction is heavily influenced by news and events not captured by technical indicators.
 
-## 📚 Learning Outcomes
-This project demonstrates the **data mining workflow** — from data understanding to model evaluation.  
-It provides hands-on insight into:
-- The challenges of **machine learning-based financial forecasting**
-- The role of **feature engineering and data scaling**
-- The importance of **realistic performance evaluation** rather than chasing accuracy.
+## 4️⃣ ROC-AUC = 0.27
+A score below 0.50 suggests:
+- The model learned misleading patterns
+- Possible inverse correlation
+- Non-stationary market behavior that breaks learned dependencies
 
+## 🧪 Root Cause Diagnosis
+### Data-Related Factors
+- Weekly directional changes are inherently noisy
+- Technical indicators alone are insufficient
+- Market regimes shift unpredictably
+- High volatility reduces signal consistency
+### Model-Related Factors
+- LSTM architecture may be too shallow
+- Lookback window (20 weeks) may be limited
+- Features do not capture external market drivers
+- Dropout insufficient to mitigate overfitting
+### Task-Related Factors
+- Binary directional forecasting is more difficult than regression
+- Market sentiment and macroeconomic influences are not included
 
-### ✍️ Author
-**Nur Hidayah Binti Abd Rahman**  
-Master in Data Science*  
+## 🛠️ Recommendations for Improvement
+### Feature Enhancements
+- Include macroeconomic indicators (VIX, interest rates, CPI, etc.)
+- Add news or social sentiment scores
+- Include volatility clusters or regime-based labeling
+### Model Enhancements
+- Experiment with GRU or Transformer architectures
+- Apply attention mechanisms
+- Use hybrid CNN+LSTM or ensemble models
+### Evaluation Improvements
+- Slice-based error analysis (by volatility, trend, volume)
+- Threshold tuning and calibration
+- More robust cross-validation for time-series
 
+## 📈 Visualizations Included
+This repository includes:
+- Training vs Validation Accuracy & Loss
+- Confusion Matrix
+- Classification Report
+- ROC Curve
+- Prediction Probability Distribution
+- Random prediction samples
+These visuals support the failure-analysis conclusions.
 
-### 📅 Last Updated
-October 2025
+## 🧰 Tools & Libraries Used
+- Python
+- TensorFlow / Keras
+- Pandas & NumPy
+- Scikit-learn
+- yfinance
+- Matplotlib
+
+## ✍️ Author
+### Nur Hidayah Binti Abd Rahman
+Master in Data Science
+
+📅 Last Updated: November 2025
