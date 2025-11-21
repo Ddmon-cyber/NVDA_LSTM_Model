@@ -1,4 +1,4 @@
-# 📊 NVDA LSTM Model — Stock Forecasting
+# 📊 NVDA (NVIDIA) LSTM Model — Stock Forecasting
 
 This project investigates the use of a Long Short-Term Memory (LSTM) network to forecast weekly price direction for NVIDIA (NVDA).
 Beyond model development, this project emphasizes **failure analysis, error diagnostics,** and **root-cause investigation.**
