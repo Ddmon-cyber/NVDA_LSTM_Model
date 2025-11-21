@@ -1,4 +1,4 @@
-# 📊 NVDA LSTM Model — Stock Direction Forecasting using Deep Learning
+# 📊 NVDA LSTM Model — Stock Forecasting using Deep Learning
 
 This project investigates the use of a Long Short-Term Memory (LSTM) network to forecast weekly price direction for NVIDIA (NVDA).
 Beyond model development, this project emphasizes **failure analysis, error diagnostics,** and **root-cause investigation.**
@@ -12,7 +12,7 @@ Beyond model development, this project emphasizes **failure analysis, error diag
   Weekly OHLCV data collected via yfinance, enriched with technical indicators:
   - SMA20, SMA50, SMA200
   - MACD, Signal Line, Histogram
-  - RSI  
+  - RSI
 - **Approach:**
 - Feature engineering (trend & momentum indicators)
 - 20-week lookback sequence creation
